@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.xiaoqian</groupId>
+    <artifactId>personalized-campaign-recommendation-platform</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <name>personalized-campaign-recommendation-platform</name>
+    <description>personalized-campaign-recommendation-platform</description>
+    <modules>
+        <module>common</module>
+    </modules>
+    <packaging>pom</packaging>
+
+    <!--编码方式、jdk版本-->
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <java.version>17</java.version>
+    </properties>
+
+    <!--对子模块进行依赖的版本控制，并没有真正引入依赖-->
+    <dependencyManagement>
+        <dependencies>
+            <!-- SpringBoot的依赖配置，用于控制其他在父模块没有的依赖的版本-->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>2.5.0</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <!--配置项目按照指定的java版本和字符编码进行编译-->
+    <build>
+        <plugins>
+            <plugin>
+                <!--配置maven版本-->
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.1</version>
+                <!--配置jdk版本-->
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                    <encoding>${project.build.sourceEncoding}</encoding>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
