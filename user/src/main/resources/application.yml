@@ -1,4 +1,9 @@
 spring:
+  data:
+    neo4j:
+      uri: http://10.211.55.3:7474
+      username: neo4j
+      password: xiaoqian666
   application:
     name: user
 

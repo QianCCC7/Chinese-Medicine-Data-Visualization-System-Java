@@ -16,7 +16,7 @@
     <!--编码方式、jdk版本-->
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <java.version>17</java.version>
+        <java.version>1.8</java.version>
     </properties>
 
     <!--对子模块进行依赖的版本控制，并没有真正引入依赖-->
@@ -26,7 +26,7 @@
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>
-                <version>2.5.0</version>
+                <version>2.3.5.RELEASE</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
