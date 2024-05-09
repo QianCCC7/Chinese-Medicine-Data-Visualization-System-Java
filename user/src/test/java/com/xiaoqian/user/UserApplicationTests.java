@@ -14,11 +14,19 @@ import java.util.Optional;
 class UserApplicationTests {
     @Autowired
     private MedicineRepository medicineRepository;
+
     @Test
     void contextLoads() {
         Optional<Medicine> op = medicineRepository.findById(75L);
         Medicine medicine = op.orElse(null);
         log.info("medicine = {}", medicine);
+    }
+
+    @Test
+    void testQuery() {
+        Optional<Medicine> op = medicineRepository.queryNodeByName("槟榔");
+        Medicine medicine = op.orElse(null);
+        log.info("res = {}", medicine);
     }
 
 }

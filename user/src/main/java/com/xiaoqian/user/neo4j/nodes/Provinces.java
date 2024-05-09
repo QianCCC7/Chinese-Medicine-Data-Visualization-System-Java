@@ -9,8 +9,8 @@ import org.neo4j.ogm.annotation.Property;
 import java.io.Serializable;
 
 @Data
-@NodeEntity(value = "medicine")
-public class Medicine implements Serializable {
+@NodeEntity("provinces")
+public class Provinces implements Serializable {
     @Id
     @GeneratedValue  // 设置主键自增
     private Long id;
@@ -19,7 +19,7 @@ public class Medicine implements Serializable {
     @Property
     private String category;
 
-    Medicine(String name, String category) {
+    Provinces(String name, String category) {
         this.name = name;
         this.category = category;
     }
