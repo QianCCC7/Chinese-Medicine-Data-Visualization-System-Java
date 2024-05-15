@@ -1,11 +1,20 @@
 spring:
+  application:
+    name: user
   data:
     neo4j:
       uri: http://10.211.55.3:7474
       username: neo4j
       password: xiaoqian666
-  application:
-    name: user
+  datasource:
+    url: jdbc:mysql://localhost:3306/pcrp?characterEncoding=utf-8&serverTimezone=Asia/Shanghai
+    username: root
+    password: xiaoqian666
+    driver-class-name: com.mysql.cj.jdbc.Driver
 
 server:
   port: 8081
+
+logging:
+  level:
+    com.xiaoqian: debug

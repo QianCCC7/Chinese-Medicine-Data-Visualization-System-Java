@@ -1,22 +1,22 @@
-package com.xiaoqian.user.relations;
+package com.xiaoqian.user.neo4j.relations;
 
-import com.xiaoqian.user.neo4j.nodes.Flavor;
 import com.xiaoqian.user.neo4j.nodes.Medicine;
+import com.xiaoqian.user.neo4j.nodes.Provinces;
 import lombok.Data;
 import org.neo4j.ogm.annotation.*;
 
 @Data
-@RelationshipEntity(type = "药味")
-public class MedicineAndFlavorRelation {
+@RelationshipEntity(type = "来源")
+public class MedicineAndProvincesRelation {
     @Id
     @GeneratedValue
     private Long id;
     @StartNode
     private Medicine start;
     @EndNode
-    private Flavor end;
+    private Provinces end;
 
-    MedicineAndFlavorRelation(Medicine start, Flavor end) {
+    MedicineAndProvincesRelation(Medicine start, Provinces end) {
         this.start = start;
         this.end = end;
     }

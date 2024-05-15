@@ -8,7 +8,7 @@ import com.xiaoqian.user.neo4j.vo.Categories;
 import com.xiaoqian.user.neo4j.vo.Node;
 import com.xiaoqian.user.neo4j.vo.Relation;
 import com.xiaoqian.user.neo4j.vo.ResultVo;
-import com.xiaoqian.user.relations.MedicineAndProvincesRelation;
+import com.xiaoqian.user.neo4j.relations.MedicineAndProvincesRelation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 

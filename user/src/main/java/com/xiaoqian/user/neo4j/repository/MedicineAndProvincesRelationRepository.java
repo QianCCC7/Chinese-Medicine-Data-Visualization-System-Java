@@ -1,6 +1,6 @@
 package com.xiaoqian.user.neo4j.repository;
 
-import com.xiaoqian.user.relations.MedicineAndProvincesRelation;
+import com.xiaoqian.user.neo4j.relations.MedicineAndProvincesRelation;
 import org.springframework.data.neo4j.annotation.Query;
 import org.springframework.data.neo4j.repository.Neo4jRepository;
 import org.springframework.data.repository.query.Param;

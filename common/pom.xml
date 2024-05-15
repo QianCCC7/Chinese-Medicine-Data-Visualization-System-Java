@@ -38,11 +38,23 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-neo4j</artifactId>
         </dependency>
-        <!-- http协议必须导入以下依赖 -->
+        <!-- neo4j使用http协议必须导入以下依赖 -->
         <dependency>
             <groupId>org.neo4j</groupId>
             <artifactId>neo4j-ogm-http-driver</artifactId>
             <version>3.2.1</version>
+        </dependency>
+        <!--mysql数据库驱动-->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.28</version>
+        </dependency>
+        <!--mybatisPlus依赖-->
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-boot-starter</artifactId>
+            <version>3.5.3.1</version>
         </dependency>
     </dependencies>
 
