@@ -90,5 +90,8 @@ public class MedicineHerbs implements Serializable {
      */
     private String url;
 
-
+    /**
+     * 炙品
+     */
+    private String roastedFood;
 }

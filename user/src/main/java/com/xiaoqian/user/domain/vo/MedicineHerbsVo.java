@@ -88,4 +88,9 @@ public class MedicineHerbsVo implements Serializable {
      * 图片路径
      */
     private String url;
+
+    /**
+     * 炙品
+     */
+    private String roastedFood;
 }
