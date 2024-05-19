@@ -1,9 +1,11 @@
 package com.xiaoqian.user;
 
 import com.xiaoqian.user.neo4j.nodes.Medicine;
+import com.xiaoqian.user.neo4j.nodes.MedicineHerbs;
+import com.xiaoqian.user.neo4j.nodes.Prescription;
 import com.xiaoqian.user.neo4j.nodes.Provinces;
-import com.xiaoqian.user.neo4j.repository.MedicineAndProvincesRelationRepository;
-import com.xiaoqian.user.neo4j.repository.MedicineRepository;
+import com.xiaoqian.user.neo4j.relations.MedicineHerbsAndPrescriptionRelation;
+import com.xiaoqian.user.neo4j.repository.*;
 import com.xiaoqian.user.neo4j.relations.MedicineAndProvincesRelation;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
@@ -46,6 +48,31 @@ class UserApplicationTests {
             Medicine start = medicineAndProvincesRelation.getStart();
             Provinces end = medicineAndProvincesRelation.getEnd();
             log.info("{} -['来源'] -> {}", start.getName(), end.getName());
+        }
+    }
+
+    @Autowired
+    private MedicineHerbsRepository medicineHerbsRepository;
+    @Autowired
+    private PrescriptionRepository prescriptionRepository;
+    @Autowired
+    private MedicineHerbsAndPrescriptionRelationRepository medicineHerbsAndPrescriptionRelationRepository;
+    @Test
+    void testNew() {
+//        Iterable<MedicineHerbs> medicineHerbsIterable = medicineHerbsRepository.findAll();
+//        for (MedicineHerbs medicineHerbs : medicineHerbsIterable) {
+//            log.info("节点为{}", medicineHerbs.getName());
+//        }
+//        Iterable<Prescription> prescriptionIterable = prescriptionRepository.findAll();
+//        for (Prescription prescription : prescriptionIterable) {
+//            log.info("节点为{}", prescription.getName());
+//        }
+        Iterable<MedicineHerbsAndPrescriptionRelation> medicineHerbsAndPrescriptionRelationIterable =
+                medicineHerbsAndPrescriptionRelationRepository.findAll();
+        for (MedicineHerbsAndPrescriptionRelation r : medicineHerbsAndPrescriptionRelationIterable) {
+            Prescription start = r.getStart();
+            MedicineHerbs end = r.getEnd();
+            log.info("{} -['来源于'] -> {}", start.getName(), end.getName());
         }
     }
 

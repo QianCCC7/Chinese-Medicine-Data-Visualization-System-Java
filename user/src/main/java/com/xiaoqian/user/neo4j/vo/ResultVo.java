@@ -13,5 +13,5 @@ import java.util.Set;
 public class ResultVo {
     private Set<Node> nodes;
     private List<Relation> relations;
-    private Set<Categories> categories;
+    private Set<Categories> medicineHerbsCategory, prescriptionCategory;
 }
