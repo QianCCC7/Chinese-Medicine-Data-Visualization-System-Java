@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import java.util.List;
 import java.util.Set;
+import java.util.TreeSet;
 
 @Data
 @NoArgsConstructor
@@ -13,5 +14,6 @@ import java.util.Set;
 public class ResultVo {
     private Set<Node> nodes;
     private List<Relation> relations;
-    private Set<Categories> medicineHerbsCategory, prescriptionCategory;
+    private Set<Categories> medicineHerbsCategory;
+    private TreeSet<Categories> prescriptionCategory;
 }

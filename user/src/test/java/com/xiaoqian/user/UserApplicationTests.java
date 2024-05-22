@@ -1,12 +1,9 @@
 package com.xiaoqian.user;
 
-import com.xiaoqian.user.neo4j.nodes.Medicine;
 import com.xiaoqian.user.neo4j.nodes.MedicineHerbs;
 import com.xiaoqian.user.neo4j.nodes.Prescription;
-import com.xiaoqian.user.neo4j.nodes.Provinces;
 import com.xiaoqian.user.neo4j.relations.MedicineHerbsAndPrescriptionRelation;
 import com.xiaoqian.user.neo4j.repository.*;
-import com.xiaoqian.user.neo4j.relations.MedicineAndProvincesRelation;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
