@@ -38,6 +38,14 @@ public class ResponseResult<T> implements Serializable {
         return new ResponseResult<T>().error(httpCodeEnum);
     }
 
+    /**
+     * 返回失败且数据为空
+     */
+    @SuppressWarnings("unused")
+    public static <T> ResponseResult<T> errorResult(Integer code, String msg) {
+        return new ResponseResult<T>().error(code, msg);
+    }
+
     private ResponseResult<T> ok(Integer code, T data, String msg) {
         this.code = code;
         this.data = data;
@@ -48,6 +56,13 @@ public class ResponseResult<T> implements Serializable {
     private ResponseResult<T> error(HttpCodeEnum httpCodeEnum) {
         this.code = httpCodeEnum.getCode();
         this.msg = httpCodeEnum.getMsg();
+        this.data = null;
+        return this;
+    }
+
+    private ResponseResult<T> error(Integer code, String msg) {
+        this.code = code;
+        this.msg = msg;
         this.data = null;
         return this;
     }

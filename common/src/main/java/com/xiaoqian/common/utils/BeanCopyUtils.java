@@ -18,7 +18,7 @@ public class BeanCopyUtils {
             v = clazz.newInstance();// 通过反射创建实例
             BeanUtils.copyProperties(source, v);
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("属性拷贝异常", e);
         }
         return v;
     }
