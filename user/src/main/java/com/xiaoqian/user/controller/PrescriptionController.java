@@ -1,7 +1,6 @@
 package com.xiaoqian.user.controller;
 
 
-import com.xiaoqian.user.domain.pojo.Prescription;
 import com.xiaoqian.user.domain.vo.PrescriptionVo;
 import com.xiaoqian.user.service.IPrescriptionService;
 import lombok.RequiredArgsConstructor;
