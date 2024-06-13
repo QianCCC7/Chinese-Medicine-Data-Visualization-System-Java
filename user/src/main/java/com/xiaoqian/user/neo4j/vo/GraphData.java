@@ -9,7 +9,7 @@ import java.util.TreeSet;
 
 @Data
 @AllArgsConstructor
-public class ResultVo {
+public class GraphData {
     private Set<Node> nodes;
     private List<Relation> relations;
     private Set<Categories> medicineHerbsCategory;

@@ -1,6 +1,7 @@
 package com.xiaoqian.user.controller;
 
 
+import com.xiaoqian.common.domain.ResponseResult;
 import com.xiaoqian.user.domain.vo.MedicineHerbsVo;
 import com.xiaoqian.user.domain.vo.PrescriptionVo;
 import com.xiaoqian.user.service.IMedicineHerbsService;
@@ -28,7 +29,7 @@ public class MedicineHerbsController {
     private final IMedicineHerbsService medicineHerbsService;
 
     @GetMapping
-    public List<MedicineHerbsVo> getAllMedicineHerbs() {
+    public ResponseResult<List<MedicineHerbsVo>> getAllMedicineHerbs() {
         return medicineHerbsService.getAllMedicineHerbs();
     }
 }

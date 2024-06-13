@@ -1,5 +1,6 @@
 package com.xiaoqian.user.service.impl;
 
+import com.xiaoqian.common.domain.ResponseResult;
 import com.xiaoqian.common.utils.BeanCopyUtils;
 import com.xiaoqian.user.neo4j.dto.SelectedLegendDto;
 import com.xiaoqian.user.neo4j.nodes.MedicineHerbs;
@@ -11,7 +12,7 @@ import com.xiaoqian.user.neo4j.repository.PrescriptionRepository;
 import com.xiaoqian.user.neo4j.vo.Categories;
 import com.xiaoqian.user.neo4j.vo.Node;
 import com.xiaoqian.user.neo4j.vo.Relation;
-import com.xiaoqian.user.neo4j.vo.ResultVo;
+import com.xiaoqian.user.neo4j.vo.GraphData;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -25,7 +26,7 @@ public class KnowledgeGraphServiceImpl {
     private final MedicineHerbsAndPrescriptionRelationRepository medicineHerbsAndPrescriptionRelationRepository;
 
     // 初始化关系图，初始只展示方剂的第一个分类下的节点以及和这些有关系的药材节点
-    public ResultVo initGraph() {
+    public ResponseResult<GraphData> initGraph() {
         // 1. 找到所有的药材节点
         Iterable<MedicineHerbs> medicineHerbsIterable = medicineHerbsRepository.findAll();
         // 2. 找到所有的方剂节点
@@ -60,11 +61,11 @@ public class KnowledgeGraphServiceImpl {
             }
         }
 
-        return new ResultVo(nodeList, relationList, medicineHerbsCategory, prescriptionCategory);
+        return ResponseResult.okResult(new GraphData(nodeList, relationList, medicineHerbsCategory, prescriptionCategory));
     }
 
 
-    public Set<Node> changeDisplayedNodes(SelectedLegendDto selectedLegendDto) {
+    public ResponseResult<Set<Node>> changeDisplayedNodes(SelectedLegendDto selectedLegendDto) {
         // 1. 获取当前图例的展示情况
         Map<String, Boolean> selected = selectedLegendDto.getSelected();
         // 2. 定义需要展示的药材和方剂节点集合
@@ -91,6 +92,6 @@ public class KnowledgeGraphServiceImpl {
                 }
             }
         }
-        return newDisplayedNodes;
+        return ResponseResult.okResult(newDisplayedNodes);
     }
 }

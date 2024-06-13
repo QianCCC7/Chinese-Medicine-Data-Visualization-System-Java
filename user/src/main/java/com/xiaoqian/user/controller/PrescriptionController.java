@@ -1,6 +1,7 @@
 package com.xiaoqian.user.controller;
 
 
+import com.xiaoqian.common.domain.ResponseResult;
 import com.xiaoqian.user.domain.vo.PrescriptionVo;
 import com.xiaoqian.user.service.IPrescriptionService;
 import lombok.RequiredArgsConstructor;
@@ -26,7 +27,7 @@ public class PrescriptionController {
     private final IPrescriptionService prescriptionService;
 
     @GetMapping
-    public List<PrescriptionVo> getAllPrescription() {
+    public ResponseResult<List<PrescriptionVo>> getAllPrescription() {
         return prescriptionService.getAllPrescription();
     }
 }

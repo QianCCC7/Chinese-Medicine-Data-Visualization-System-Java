@@ -1,5 +1,6 @@
 package com.xiaoqian.user.service.impl;
 
+import com.xiaoqian.common.domain.ResponseResult;
 import com.xiaoqian.common.utils.BeanCopyUtils;
 import com.xiaoqian.user.domain.pojo.Prescription;
 import com.xiaoqian.user.domain.vo.PrescriptionVo;
@@ -22,8 +23,8 @@ import java.util.List;
 public class PrescriptionServiceImpl extends ServiceImpl<PrescriptionMapper, Prescription> implements IPrescriptionService {
 
     @Override
-    public List<PrescriptionVo> getAllPrescription() {
+    public ResponseResult<List<PrescriptionVo>> getAllPrescription() {
         List<Prescription> prescriptionList = list();
-        return BeanCopyUtils.copyBeanList(prescriptionList, PrescriptionVo.class);
+        return ResponseResult.okResult(BeanCopyUtils.copyBeanList(prescriptionList, PrescriptionVo.class));
     }
 }

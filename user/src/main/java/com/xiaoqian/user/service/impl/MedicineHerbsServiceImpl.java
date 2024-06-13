@@ -1,5 +1,6 @@
 package com.xiaoqian.user.service.impl;
 
+import com.xiaoqian.common.domain.ResponseResult;
 import com.xiaoqian.common.utils.BeanCopyUtils;
 import com.xiaoqian.user.domain.pojo.MedicineHerbs;
 import com.xiaoqian.user.domain.pojo.Prescription;
@@ -24,8 +25,8 @@ import java.util.List;
 public class MedicineHerbsServiceImpl extends ServiceImpl<MedicineHerbsMapper, MedicineHerbs> implements IMedicineHerbsService {
 
     @Override
-    public List<MedicineHerbsVo> getAllMedicineHerbs() {
+    public ResponseResult<List<MedicineHerbsVo>> getAllMedicineHerbs() {
         List<MedicineHerbs> medicineHerbsList = list();
-        return BeanCopyUtils.copyBeanList(medicineHerbsList, MedicineHerbsVo.class);
+        return ResponseResult.okResult(BeanCopyUtils.copyBeanList(medicineHerbsList, MedicineHerbsVo.class));
     }
 }
