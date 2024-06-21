@@ -1,8 +1,7 @@
 package com.xiaoqian.user.domain.vo;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
@@ -20,77 +19,50 @@ import java.io.Serializable;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
+@ApiModel("药材信息")
 public class MedicineHerbsVo implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    /**
-     * id
-     */
+    @ApiModelProperty("药材id")
     private Integer id;
 
-    /**
-     * 名称
-     */
+    @ApiModelProperty("名称")
     private String name;
 
-    /**
-     * 拼音
-     */
+    @ApiModelProperty("拼音")
     private String pinyin;
 
-    /**
-     * 英文名
-     */
+    @ApiModelProperty("英文名")
     private String englishName;
 
-    /**
-     * 拉丁名
-     */
+    @ApiModelProperty("拉丁名")
     private String latinName;
 
-    /**
-     * 分类
-     */
+    @ApiModelProperty("分类")
     private String category;
 
-    /**
-     * 产地
-     */
+    @ApiModelProperty("产地")
     private String provinces;
 
-    /**
-     * 性状
-     */
+    @ApiModelProperty("性状")
     private String nature;
 
-    /**
-     * 品质
-     */
+    @ApiModelProperty("品质")
     private String quality;
 
-    /**
-     * 性味
-     */
+    @ApiModelProperty("性味")
     private String flavor;
 
-    /**
-     * 功效
-     */
+    @ApiModelProperty("功效")
     private String benefits;
 
-    /**
-     * 来源
-     */
+    @ApiModelProperty("来源")
     private String source;
 
-    /**
-     * 图片路径
-     */
+    @ApiModelProperty("图片路径")
     private String url;
 
-    /**
-     * 炙品
-     */
+    @ApiModelProperty("炙品")
     private String roastedFood;
 }

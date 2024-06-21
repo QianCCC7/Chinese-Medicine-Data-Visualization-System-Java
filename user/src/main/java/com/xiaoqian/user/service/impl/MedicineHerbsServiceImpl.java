@@ -24,6 +24,9 @@ import java.util.List;
 @Service
 public class MedicineHerbsServiceImpl extends ServiceImpl<MedicineHerbsMapper, MedicineHerbs> implements IMedicineHerbsService {
 
+    /**
+     * 获取所有的中医药材数据列表
+     */
     @Override
     public ResponseResult<List<MedicineHerbsVo>> getAllMedicineHerbs() {
         List<MedicineHerbs> medicineHerbsList = list();

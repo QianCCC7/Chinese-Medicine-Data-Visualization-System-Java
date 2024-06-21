@@ -2,7 +2,7 @@ package com.xiaoqian.user.service.impl;
 
 import com.xiaoqian.common.domain.ResponseResult;
 import com.xiaoqian.common.utils.BeanCopyUtils;
-import com.xiaoqian.user.neo4j.dto.SelectedLegendDto;
+import com.xiaoqian.user.domain.dto.SelectedLegendDto;
 import com.xiaoqian.user.neo4j.nodes.MedicineHerbs;
 import com.xiaoqian.user.neo4j.nodes.Prescription;
 import com.xiaoqian.user.neo4j.relations.MedicineHerbsAndPrescriptionRelation;
@@ -25,7 +25,10 @@ public class KnowledgeGraphServiceImpl {
     private final PrescriptionRepository prescriptionRepository;
     private final MedicineHerbsAndPrescriptionRelationRepository medicineHerbsAndPrescriptionRelationRepository;
 
-    // 初始化关系图，初始只展示方剂的第一个分类下的节点以及和这些有关系的药材节点
+    /**
+     * 初始化关系图，返回所有的节点信息以及关系数据
+     * 但是初始只展示方剂的第一个分类下的节点以及和这些有关系的药材节点(前端处理)
+      */
     public ResponseResult<GraphData> initGraph() {
         // 1. 找到所有的药材节点
         Iterable<MedicineHerbs> medicineHerbsIterable = medicineHerbsRepository.findAll();
@@ -65,26 +68,29 @@ public class KnowledgeGraphServiceImpl {
     }
 
 
+    /**
+     * 用户点击图例时，修改展示的节点为所有选中的图例的节点
+     */
     public ResponseResult<Set<Node>> changeDisplayedNodes(SelectedLegendDto selectedLegendDto) {
         // 1. 获取当前图例的展示情况
         Map<String, Boolean> selected = selectedLegendDto.getSelected();
         // 2. 定义需要展示的药材和方剂节点集合
         Set<Node> newDisplayedNodes = new HashSet<>();
         for (Map.Entry<String, Boolean> entry : selected.entrySet()) {
-            // 为 true说明需要展示对应分类下的节点
+            // 为 true说明需要展示对应分类(图例)下的节点
             if (entry.getValue().equals(Boolean.TRUE)) {
                 String categoryName = entry.getKey();
-                // 3. 获取到与当前分类下方剂节点存在关系的所有药材节点
+                // 3. 获取到与当前分类(图例)下方剂节点存在关系的所有药材节点
                 Set<MedicineHerbs> medicineHerbsSet =
-                        medicineHerbsAndPrescriptionRelationRepository.getNodesByCategoryName(categoryName);
+                        medicineHerbsAndPrescriptionRelationRepository.getMedicineHerbsNodesByPrescriptionCategory(categoryName);
                 for (MedicineHerbs medicineHerbs : medicineHerbsSet) {
                     Node node = BeanCopyUtils.copyBean(medicineHerbs, Node.class);
                     node.setSymbolSize(80);
                     newDisplayedNodes.add(node);
                 }
-                // 4. 获取到当前分类下所有的方剂节点
+                // 4. 获取到当前分类(图例)下所有的方剂节点
                 Set<Prescription> prescriptionsSet =
-                        medicineHerbsAndPrescriptionRelationRepository.getNodesByCategoryName2(categoryName);
+                        medicineHerbsAndPrescriptionRelationRepository.getPrescriptionNodesByPrescriptionCategory(categoryName);
                 for (Prescription prescription : prescriptionsSet) {
                     Node node = BeanCopyUtils.copyBean(prescription, Node.class);
                     node.setSymbolSize(80);

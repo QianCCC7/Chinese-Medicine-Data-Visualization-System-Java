@@ -22,6 +22,9 @@ import java.util.List;
 @Service
 public class PrescriptionServiceImpl extends ServiceImpl<PrescriptionMapper, Prescription> implements IPrescriptionService {
 
+    /**
+     * 获取所有的中医药材数据列表
+     */
     @Override
     public ResponseResult<List<PrescriptionVo>> getAllPrescription() {
         List<Prescription> prescriptionList = list();

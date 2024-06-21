@@ -6,6 +6,8 @@ import com.xiaoqian.user.domain.vo.MedicineHerbsVo;
 import com.xiaoqian.user.domain.vo.PrescriptionVo;
 import com.xiaoqian.user.service.IMedicineHerbsService;
 import com.xiaoqian.user.service.IPrescriptionService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,9 +27,11 @@ import java.util.List;
 @RestController
 @RequestMapping("/medicine-herbs")
 @RequiredArgsConstructor
+@Api("中医药材相关接口")
 public class MedicineHerbsController {
     private final IMedicineHerbsService medicineHerbsService;
 
+    @ApiOperation("获取所有的中医药材数据列表")
     @GetMapping
     public ResponseResult<List<MedicineHerbsVo>> getAllMedicineHerbs() {
         return medicineHerbsService.getAllMedicineHerbs();
