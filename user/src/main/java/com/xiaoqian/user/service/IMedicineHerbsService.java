@@ -1,6 +1,8 @@
 package com.xiaoqian.user.service;
 
 import com.xiaoqian.common.domain.ResponseResult;
+import com.xiaoqian.common.query.PageQuery;
+import com.xiaoqian.common.query.PageVo;
 import com.xiaoqian.user.domain.pojo.MedicineHerbs;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.xiaoqian.user.domain.vo.MedicineHerbsVo;
@@ -18,4 +20,6 @@ import java.util.List;
 public interface IMedicineHerbsService extends IService<MedicineHerbs> {
 
     ResponseResult<List<MedicineHerbsVo>> getAllMedicineHerbs();
+
+    ResponseResult<PageVo<MedicineHerbsVo>> getMedicineHerbsPage(PageQuery pageQuery);
 }
