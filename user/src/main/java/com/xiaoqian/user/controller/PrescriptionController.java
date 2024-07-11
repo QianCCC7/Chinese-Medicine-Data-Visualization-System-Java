@@ -2,6 +2,9 @@ package com.xiaoqian.user.controller;
 
 
 import com.xiaoqian.common.domain.ResponseResult;
+import com.xiaoqian.common.query.PageQuery;
+import com.xiaoqian.common.query.PageVo;
+import com.xiaoqian.user.domain.vo.MedicineHerbsVo;
 import com.xiaoqian.user.domain.vo.PrescriptionVo;
 import com.xiaoqian.user.service.IPrescriptionService;
 import io.swagger.annotations.Api;
@@ -33,5 +36,11 @@ public class PrescriptionController {
     @GetMapping
     public ResponseResult<List<PrescriptionVo>> getAllPrescription() {
         return prescriptionService.getAllPrescription();
+    }
+
+    @ApiOperation("分页查询中方剂数据")
+    @GetMapping("/page")
+    public ResponseResult<PageVo<PrescriptionVo>> getPrescriptionPage(PageQuery pageQuery) {
+        return prescriptionService.getPrescriptionPage(pageQuery);
     }
 }
