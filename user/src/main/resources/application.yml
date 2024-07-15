@@ -7,7 +7,7 @@ spring:
       username: neo4j
       password: xiaoqian666
   datasource:
-    url: jdbc:mysql://localhost:3306/pcrp?characterEncoding=utf-8&serverTimezone=Asia/Shanghai
+    url: jdbc:mysql://localhost:3306/cmd_vs?characterEncoding=utf-8&serverTimezone=Asia/Shanghai
     username: root
     password: xiaoqian666
     driver-class-name: com.mysql.cj.jdbc.Driver
