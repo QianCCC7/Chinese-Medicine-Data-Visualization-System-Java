@@ -42,6 +42,7 @@ public class PrescriptionServiceImpl extends ServiceImpl<PrescriptionMapper, Pre
     public ResponseResult<PageVo<PrescriptionVo>> getPrescriptionPage(PageQuery pageQuery) {
         // 1. 封装分页参数
         Page<Prescription> page = new Page<>(pageQuery.getPageNum(), pageQuery.getPageSize());
+        page.setOptimizeCountSql(false);
         // 2. 分页查询
         page(page);
         // 3. 获取查询数据
