@@ -17,5 +17,8 @@ import java.util.List;
  */
 public interface IMenuService extends IService<Menu> {
 
+    /**
+     * 获取所有菜单
+     */
     ResponseResult<List<MenuVo>> getAllMenus();
 }

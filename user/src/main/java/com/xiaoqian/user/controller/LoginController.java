@@ -2,6 +2,7 @@ package com.xiaoqian.user.controller;
 
 import com.xiaoqian.common.domain.ResponseResult;
 import com.xiaoqian.user.domain.dto.LoginUserDto;
+import com.xiaoqian.user.domain.dto.RegisterUserDto;
 import com.xiaoqian.user.domain.vo.LoginUserVo;
 import com.xiaoqian.user.service.LoginService;
 import io.swagger.annotations.Api;
@@ -19,6 +20,12 @@ public class LoginController {
     @PostMapping("login")
     public ResponseResult<LoginUserVo> login(@RequestBody LoginUserDto loginUserDto) {
         return loginService.login(loginUserDto);
+    }
+
+    @ApiOperation("用户注册")
+    @PostMapping("/register")
+    public ResponseResult<Void> register(@RequestBody RegisterUserDto registerUserDto) {
+        return loginService.register(registerUserDto);
     }
 
 }

@@ -18,7 +18,7 @@ import org.springframework.stereotype.Service;
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IUserService {
 
     /**
-     * 根据用户id查询用户
+     * 根据用户名查询用户
      */
     @Override
     public User findUserByUsername(String username) {

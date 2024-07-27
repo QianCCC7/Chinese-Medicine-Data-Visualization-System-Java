@@ -20,7 +20,13 @@ import java.util.List;
  */
 public interface IPrescriptionService extends IService<Prescription> {
 
+    /**
+     * 获取所有的中医药材数据列表
+     */
     ResponseResult<List<PrescriptionVo>> getAllPrescription();
 
+    /**
+     * 分页查询中医方剂数据
+     */
     ResponseResult<PageVo<PrescriptionVo>> getPrescriptionPage(PageQuery pageQuery);
 }

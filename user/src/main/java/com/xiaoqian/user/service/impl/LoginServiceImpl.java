@@ -1,19 +1,24 @@
 package com.xiaoqian.user.service.impl;
 
 import com.xiaoqian.common.domain.ResponseResult;
+import com.xiaoqian.common.enums.HttpCodeEnum;
+import com.xiaoqian.common.exception.LoginException;
 import com.xiaoqian.common.utils.BeanCopyUtils;
 import com.xiaoqian.common.utils.JwtUtils;
 import com.xiaoqian.common.constants.RedisLoginUserConstants;
 import com.xiaoqian.user.domain.dto.LoginUserDto;
+import com.xiaoqian.user.domain.dto.RegisterUserDto;
 import com.xiaoqian.user.domain.pojo.User;
 import com.xiaoqian.user.domain.vo.LoginUserVo;
 import com.xiaoqian.user.security.UserDetailsImpl;
+import com.xiaoqian.user.service.IUserService;
 import com.xiaoqian.user.service.LoginService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.concurrent.TimeUnit;
@@ -24,6 +29,8 @@ import java.util.concurrent.TimeUnit;
 public class LoginServiceImpl implements LoginService {
     private final AuthenticationManager authenticationManager;
     private final RedisTemplate redisTemplate;
+    private final IUserService userService;
+    private final PasswordEncoder passwordEncoder;
 
     /**
      * 用户登录
@@ -45,5 +52,27 @@ public class LoginServiceImpl implements LoginService {
         LoginUserVo loginUserVo = new LoginUserVo(jwt, BeanCopyUtils.copyBean(loginUser, LoginUserVo.LoginUserInfo.class));
 
         return ResponseResult.okResult(loginUserVo);
+    }
+
+    /**
+     * 用户注册
+     */
+    @Override
+    public ResponseResult<Void> register(RegisterUserDto registerUser) {
+        // 1. 校验用户名是否存在
+        if (checkUserRepeat(registerUser.getUsername())) {
+            throw new LoginException(HttpCodeEnum.USERNAME_ALREADY_EXISTS);
+        }
+        // 2. 密码加密
+        registerUser.setPassword(passwordEncoder.encode(registerUser.getPassword()));
+        userService.save(BeanCopyUtils.copyBean(registerUser, User.class));
+        return ResponseResult.okEmptyResult();
+    }
+
+    /**
+     * 判断用户名是否存在
+     */
+    private boolean checkUserRepeat(String username) {
+        return userService.lambdaQuery().eq(User::getUsername, username).count() > 0;
     }
 }

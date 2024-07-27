@@ -19,7 +19,13 @@ import java.util.List;
  */
 public interface IMedicineHerbsService extends IService<MedicineHerbs> {
 
+    /**
+     * 获取所有的中医药材数据列表
+     */
     ResponseResult<List<MedicineHerbsVo>> getAllMedicineHerbs();
 
+    /**
+     * 分页查询中医药材数据
+     */
     ResponseResult<PageVo<MedicineHerbsVo>> getMedicineHerbsPage(PageQuery pageQuery);
 }

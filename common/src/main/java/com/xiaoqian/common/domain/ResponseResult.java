@@ -17,7 +17,6 @@ public class ResponseResult<T> implements Serializable {
     /**
      * 返回成功且有数据集
      */
-    @SuppressWarnings("unused")
     public static <T> ResponseResult<T> okResult(T data) {
         return new ResponseResult<T>().ok(HttpCodeEnum.SUCCESS.getCode(), data, HttpCodeEnum.SUCCESS.getMsg());
     }
@@ -25,7 +24,6 @@ public class ResponseResult<T> implements Serializable {
     /**
      * 返回成功且数据为空(void类型返回值)
      */
-    @SuppressWarnings("unused")
     public static <T> ResponseResult<T> okEmptyResult() {
         return new ResponseResult<T>().ok(HttpCodeEnum.SUCCESS.getCode(), null, HttpCodeEnum.SUCCESS.getMsg());
     }
