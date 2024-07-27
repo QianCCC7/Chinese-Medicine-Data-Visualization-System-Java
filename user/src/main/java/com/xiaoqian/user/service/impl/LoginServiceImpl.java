@@ -18,6 +18,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -74,5 +75,20 @@ public class LoginServiceImpl implements LoginService {
      */
     private boolean checkUserRepeat(String username) {
         return userService.lambdaQuery().eq(User::getUsername, username).count() > 0;
+    }
+
+    /**
+     * 用户注销
+     */
+    @Override
+    public ResponseResult<Void> logout() {
+        // 1. 获取当前登录用户
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
+        Integer userId = userDetails.getUser().getId();
+        // 2. 删除用户登录信息
+        String key = String.format(RedisLoginUserConstants.REDIS_LOGIN_USER_PREFIX, userId);
+        redisTemplate.delete(key);
+        return ResponseResult.okEmptyResult();
     }
 }

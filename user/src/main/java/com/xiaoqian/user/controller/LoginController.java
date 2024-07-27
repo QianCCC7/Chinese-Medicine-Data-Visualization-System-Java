@@ -28,4 +28,10 @@ public class LoginController {
         return loginService.register(registerUserDto);
     }
 
+    @ApiOperation("用户注销")
+    @PostMapping("/logout")
+    public ResponseResult<Void> logout() {
+        return loginService.logout();
+    }
+
 }

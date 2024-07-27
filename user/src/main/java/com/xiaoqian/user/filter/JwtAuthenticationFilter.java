@@ -1,8 +1,12 @@
 package com.xiaoqian.user.filter;
 
+import com.alibaba.fastjson.JSON;
 import com.xiaoqian.common.constants.RedisLoginUserConstants;
+import com.xiaoqian.common.domain.ResponseResult;
+import com.xiaoqian.common.enums.HttpCodeEnum;
+import com.xiaoqian.common.exception.LoginException;
 import com.xiaoqian.common.utils.JwtUtils;
-import com.xiaoqian.user.domain.pojo.User;
+import com.xiaoqian.common.utils.WebUtils;
 import com.xiaoqian.user.security.UserDetailsImpl;
 import io.jsonwebtoken.Claims;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -42,7 +46,9 @@ public class JwtAuthenticationFilter extends BasicAuthenticationFilter {
             claims = JwtUtils.parseJWT(token);
         } catch (Exception e) {
             // token过期或者被篡改
-            throw new RuntimeException(e);
+            String error = JSON.toJSONString(ResponseResult.errorResult(HttpCodeEnum.USER_IDENTITY_HAS_EXPIRED));
+            WebUtils.renderString(response, error);
+            throw new LoginException(HttpCodeEnum.USER_IDENTITY_HAS_EXPIRED);
         }
         String userId = claims.getSubject();
         // 3. redis获取用户数据
@@ -50,12 +56,13 @@ public class JwtAuthenticationFilter extends BasicAuthenticationFilter {
         UserDetailsImpl userDetails = (UserDetailsImpl) redisTemplate.opsForValue().get(key);
         if (userDetails == null) {
             // 登录过期
+            String error = JSON.toJSONString(ResponseResult.errorResult(HttpCodeEnum.USER_IDENTITY_HAS_EXPIRED));
+            WebUtils.renderString(response, error);
             return;
         }
-        User user = userDetails.getUser();
         // 4. 存入 SecurityContextHolder
         UsernamePasswordAuthenticationToken authenticationToken =
-                new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword(), null);
+                new UsernamePasswordAuthenticationToken(userDetails, userDetails.getPassword(), null);
         SecurityContextHolder.getContext().setAuthentication(authenticationToken);
         // 5. 放行
         chain.doFilter(request, response);

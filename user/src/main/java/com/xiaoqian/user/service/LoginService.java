@@ -15,4 +15,9 @@ public interface LoginService {
      * 用户注册
      */
     ResponseResult<Void> register(RegisterUserDto registerUserDto);
+
+    /**
+     * 用户注销
+     */
+    ResponseResult<Void> logout();
 }
