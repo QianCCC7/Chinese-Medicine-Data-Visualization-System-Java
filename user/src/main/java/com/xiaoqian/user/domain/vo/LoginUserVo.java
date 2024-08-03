@@ -24,6 +24,8 @@ public class LoginUserVo {
         private String username;
         @ApiModelProperty("用户手机号")
         private String phone;
+        @ApiModelProperty("用户邮箱")
+        private String email;
         @ApiModelProperty("用户头像")
         private String avatar;
     }
