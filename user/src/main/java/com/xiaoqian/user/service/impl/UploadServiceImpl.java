@@ -22,8 +22,12 @@ public class UploadServiceImpl implements UploadService {
      */
     @Override
     public ResponseResult<String> uploadAvatar(MultipartFile imgFile) {
-        // 1. github请求 url
-        String url = ImageBedConstants.BASE_URL + imgFile.getOriginalFilename();
+        // 1. 请求 url
+        String fileName = imgFile.getOriginalFilename();
+        assert fileName != null;
+        String filePrefix = fileName.substring(0, fileName.lastIndexOf("."));
+        String fileSuffix = fileName.substring(fileName.lastIndexOf("."));
+        String url = ImageBedConstants.BASE_URL + filePrefix + "-" + System.currentTimeMillis() + fileSuffix;
         // 2. 将图片进行 Base64编码
         String base64Image;
         try {

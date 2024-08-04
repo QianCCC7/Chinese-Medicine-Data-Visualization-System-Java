@@ -17,7 +17,7 @@ public class UploadController {
     private final UploadService uploadService;
 
     @ApiOperation("上传用户头像")
-    @PostMapping("/upload")
+    @PostMapping("/uploadAvatar")
     public ResponseResult<String> uploadAvatar(@RequestParam(value = "imgFile") MultipartFile imgFile) {
         return uploadService.uploadAvatar(imgFile);
     }
